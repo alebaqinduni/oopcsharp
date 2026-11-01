@@ -1,0 +1,6 @@
+oil,-,60,80,10
+milk,cows milk,50,60,10
+tillo,oil,40,40,10
+tissue,wipes,40,60,10
+rtu,uii,57,35,1
+bag,carry,600,700,10

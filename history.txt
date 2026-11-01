@@ -1,0 +1,35 @@
+Product added: oil
+Product added: milk
+Product added: tillo
+Product updated: tillo
+Customer added: ali
+Customer added: areeba
+Category added: stationary
+Category added: oils
+Category added: milks
+Category added: cars
+Supplier added: al fateh
+Supplier added: victoria
+Supplier added: cakes n bakes
+Product added: tissue
+Product added: f
+Product added: rtu
+Product Price updated: tillo
+Product deleted: f
+Product added: bag
+Customer added: alia
+Customer added: you
+Customer updated: you
+Customer deleted: alia
+Customer added: alia
+Category added: oilss
+Category updated: oilss
+Category added: rio
+Category updated: yo
+Category updated: rio
+Category added: y
+Category deleted: y
+Supplier added: u
+Supplier added: y
+Supplier deleted: y
+Supplier updated: uol

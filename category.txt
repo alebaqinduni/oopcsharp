@@ -1,0 +1,6 @@
+stationary,scales
+oils,liquid
+milks,cows
+cars,four wheelers
+oilss,biscut
+rio,cake
