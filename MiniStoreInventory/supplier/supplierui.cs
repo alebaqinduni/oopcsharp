@@ -18,7 +18,8 @@ namespace ClassStore
                 Console.WriteLine("  3. Delete Supplier");
                 Console.WriteLine("  4. View All");
                 Console.WriteLine("  5. Search");
-                Console.WriteLine("  6. Back to Main Menu");
+                Console.WriteLine("  6. Search by Partial Name: ");
+                Console.WriteLine("  7. Back to Main Menu");
                 Console.ResetColor();
                 Console.Write("\nSelect option: ");
                 string choice = Console.ReadLine();
@@ -28,7 +29,8 @@ namespace ClassStore
                 else if (choice == "3") Delete();
                 else if (choice == "4") DisplayAll();
                 else if (choice == "5") Search();
-                else if (choice == "6") break;
+                else if (choice == "6") SearchByPartialName();
+                else if (choice == "7") break;
                 else { ConsoleUI.Error("Invalid choice."); ConsoleUI.Pause(); }
             }
         }
@@ -50,6 +52,47 @@ namespace ClassStore
             service.SaveSupplier(TakeInput());
             ConsoleUI.Success("Supplier saved successfully.");
             ConsoleUI.Pause();
+        }
+
+        public void SearchByPartialName()
+        {
+            ConsoleUI.Header("Search by the Partial Name");
+            Console.Write("Enter partial supplier name: ");
+            string name = Console.ReadLine();
+            List<SupplierModel> p = service.SearchByPartialName(name);
+            if (p.Count == 0)
+            {
+                ConsoleUI.Error("No matching products found.");
+            }
+            else
+            {
+                DisplaySupplierTable(p);
+            }
+            ConsoleUI.Pause();
+        }
+
+        private void DisplaySupplierTable(List<SupplierModel> items)
+        {
+        if (items.Count == 0)
+        {
+            Console.WriteLine("No records found.");
+            return;
+        }
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine(
+        "  {0,-15} | {1,-20} | {2,9} ",
+        "NAME", "PHONE", "COMPANY");
+        Console.WriteLine("  " + new string('-', 91));
+        foreach (SupplierModel item in items)
+        {
+        Console.WriteLine(
+            "  {0,-15} | {1,-20} | {2,9}",
+            
+            item.GetName(),
+            item.GetPhone(),
+            item.GetCompany());
+        }
+        Console.ResetColor();
         }
 
         private void Update()

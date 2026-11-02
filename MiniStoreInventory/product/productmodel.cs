@@ -4,8 +4,8 @@ namespace ClassStore
     {
     private string name;
     private string description;
-    private float purchasePrice;
-    private float salePrice;
+    public float purchasePrice;
+    public float salePrice;
     private float discount;
 
         public ProductModel(string name, string description, float purchasePrice, float salePrice, float discount)
@@ -25,7 +25,8 @@ namespace ClassStore
         public string Display()
         {
             return "name: " + name + " | " + "description: " + description + " | " + "purchasePrice: " + purchasePrice + " | " + "salePrice: " + salePrice + " | " + "discount: " + discount;
-        }
+            
+            }
 
         // GETTER returns the property's value.
         // SETTER changes the property's value.

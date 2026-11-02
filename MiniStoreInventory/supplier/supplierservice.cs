@@ -19,6 +19,20 @@ namespace ClassStore
             return _repo.GetAllSuppliers();
         }
 
+        
+        public List<SupplierModel> SearchByPartialName(string name)
+        {
+            List<SupplierModel> products = _repo.GetAllSuppliers();
+            List<SupplierModel> answer = new List<SupplierModel>();
+            foreach (SupplierModel p in products)
+            {
+                if (p.GetName().ToLower().Contains(name.ToLower()))
+                {
+                    answer.Add(p);
+                }
+            }
+            return answer;
+        }
         public SupplierModel SearchByName(string name)
         {
             foreach (SupplierModel item in _repo.GetAllSuppliers())
@@ -68,5 +82,7 @@ namespace ClassStore
             }
             return false;
         }
+
+        
     }
 }//

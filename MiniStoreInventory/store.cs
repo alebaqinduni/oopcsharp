@@ -37,6 +37,22 @@ namespace ClassStore
                 }
                 else if (choice == "6")
                 {
+                    ProductUI productUI = new ProductUI();
+                    productUI.SearchByPartialName();
+
+                    CustomerUI customerUI = new CustomerUI();
+                    customerUI.SearchByPartialName();
+
+                    CategoryUI categoryUI = new CategoryUI();
+                    categoryUI.SearchByPartialName();
+
+                    SupplierUI supplierUI = new SupplierUI();
+                    supplierUI.SearchByPartialName();
+
+
+                }
+                else if (choice == "7")
+                {
                     break;
                 }
                 else
@@ -56,7 +72,8 @@ namespace ClassStore
             Console.WriteLine("  3. Category Management");
             Console.WriteLine("  4. Supplier Management");
             Console.WriteLine("  5. View History");
-            Console.WriteLine("  6. Exit");
+            Console.WriteLine("  6. Search by Partial Name: ");
+            Console.WriteLine("  7. Exit");
             Console.ResetColor();
             Console.Write("\n  Please select an option: ");
             string choice = Console.ReadLine();

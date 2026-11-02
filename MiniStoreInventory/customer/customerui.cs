@@ -18,7 +18,8 @@ namespace ClassStore
                 Console.WriteLine("  3. Delete Customer");
                 Console.WriteLine("  4. View All");
                 Console.WriteLine("  5. Search");
-                Console.WriteLine("  6. Back to Main Menu");
+                Console.WriteLine("  6. Search by Partial Name: ");
+                Console.WriteLine("  7. Back to Main Menu");
                 Console.ResetColor();
                 Console.Write("\nSelect option: ");
                 string choice = Console.ReadLine();
@@ -28,7 +29,8 @@ namespace ClassStore
                 else if (choice == "3") Delete();
                 else if (choice == "4") DisplayAll();
                 else if (choice == "5") Search();
-                else if (choice == "6") break;
+                else if (choice == "6") SearchByPartialName();
+                else if (choice == "7") break;
                 else { ConsoleUI.Error("Invalid choice."); ConsoleUI.Pause(); }
             }
         }
@@ -52,6 +54,45 @@ namespace ClassStore
             ConsoleUI.Pause();
         }
 
+        public void SearchByPartialName()
+        {
+            ConsoleUI.Header("Search by the Partial Name");
+            Console.Write("Enter partial customer name: ");
+            string name = Console.ReadLine();
+            List<CustomerModel> p = service.SearchByPartialName(name);
+            if (p.Count == 0)
+            {
+                ConsoleUI.Error("No matching products found.");
+            }
+            else
+            {
+                DisplayCustomerTable(p);
+            }
+            ConsoleUI.Pause();
+        }
+
+        private void DisplayCustomerTable(List<CustomerModel> items)
+        {
+        if (items.Count == 0)
+        {
+            Console.WriteLine("No records found.");
+            return;
+        }
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine(
+        "  {0,-15} | {1,-20} | {2,9}",
+        "NAME", "PHONE", "EMAIL");
+        Console.WriteLine("  " + new string('-', 61));
+        foreach (CustomerModel item in items)
+        {
+        Console.WriteLine(
+            "  {0,-15} | {1,-20} | {2,9}",
+            item.GetName(),
+            item.GetPhone(),
+            item.GetEmail());
+        }
+        Console.ResetColor();
+        }
         private void Update()
         {
             ConsoleUI.Header("Update Customer");

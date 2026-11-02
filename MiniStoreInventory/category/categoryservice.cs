@@ -19,11 +19,25 @@ namespace ClassStore
             return _repo.GetAllCategorys();
         }
 
+        public List<CategoryModel> SearchByPartialName(string name)
+        {
+            List<CategoryModel> products = _repo.GetAllCategorys();
+            List<CategoryModel> answer = new List<CategoryModel>();
+            foreach (CategoryModel p in products)
+            {
+                if (p.GetName().ToLower().Contains(name.ToLower()))
+                {
+                    answer.Add(p);
+                }
+            }
+            return answer;
+        }
+//---------------------------------------------------------------------
         public CategoryModel SearchByName(string name)
         {
             foreach (CategoryModel item in _repo.GetAllCategorys())
             {
-                if (item.GetName() == name)
+                if (item.GetName().ToLower().Contains(name.ToLower()))
                 {
                     return item;
                 }

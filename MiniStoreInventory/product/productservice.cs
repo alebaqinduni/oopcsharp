@@ -7,10 +7,17 @@ namespace ClassStore
     internal class ProductService
     {
         private ProductRepo _repo = new ProductRepo();
+        //here condition is written
         public void SaveProduct(ProductModel product)
         {
+            foreach (ProductModel p in _repo.GetAllProducts())
+            {
+            if(p.GetPurchasePrice()>500 || p.GetPurchasePrice()<1000 && p.GetSalePrice()>500 || p.GetPurchasePrice()<1000)
+            {
             _repo.SaveInFile(product);
             File.AppendAllText("history.txt", "Product added: " + product.GetName() + Environment.NewLine);
+            }
+            }
         }
 
         public List<ProductModel> GetAllProducts()
@@ -71,15 +78,15 @@ namespace ClassStore
         public List<ProductModel> SearchByPartialName(string name)
         {
             List<ProductModel> products = _repo.GetAllProducts();
-            List<ProductModel> result = new List<ProductModel>();
+            List<ProductModel> answer = new List<ProductModel>();
             foreach (ProductModel p in products)
             {
                 if (p.GetName().ToLower().Contains(name.ToLower()))
                 {
-                    result.Add(p);
+                    answer.Add(p);
                 }
             }
-            return result;
+            return answer;
         }
 
         public List<ProductModel> SortAscending()

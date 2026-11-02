@@ -18,7 +18,7 @@ namespace ClassStore
                 Console.WriteLine("  3. Delete Product");
                 Console.WriteLine("  4. View All");
                 Console.WriteLine("  5. Search");
-                Console.WriteLine("  6. Search by Partial Name");
+                Console.WriteLine("  6. Search by Partial Name: ");
                 Console.WriteLine("  7. Sort Ascending ");//a-z
                 Console.WriteLine("  8. Sort Descending ");//z-a
                 Console.WriteLine("  9. Back to Main Menu");
@@ -162,19 +162,19 @@ namespace ClassStore
             ConsoleUI.Pause();
         }
 
-        private void SearchByPartialName()
+        public void SearchByPartialName()
         {
-            ConsoleUI.Header("Search by Partial Name");
+            ConsoleUI.Header("Search by the Partial Name");
             Console.Write("Enter partial product name: ");
             string name = Console.ReadLine();
-            List<ProductModel> items = service.SearchByPartialName(name);
-            if (items.Count == 0)
+            List<ProductModel> p = service.SearchByPartialName(name);
+            if (p.Count == 0)
             {
                 ConsoleUI.Error("No matching products found.");
             }
             else
             {
-                DisplayProductTable(items);
+                DisplayProductTable(p);
             }
             ConsoleUI.Pause();
         }

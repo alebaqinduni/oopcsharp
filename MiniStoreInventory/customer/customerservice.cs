@@ -19,6 +19,19 @@ namespace ClassStore
             return _repo.GetAllCustomers();
         }
 
+        public List<CustomerModel> SearchByPartialName(string name)
+        {
+            List<CustomerModel> products = _repo.GetAllCustomers();
+            List<CustomerModel> answer = new List<CustomerModel>();
+            foreach (CustomerModel p in products)
+            {
+                if (p.GetName().ToLower().Contains(name.ToLower()))
+                {
+                    answer.Add(p);
+                }
+            }
+            return answer;
+        }
         public CustomerModel SearchByName(string name)
         {
             foreach (CustomerModel item in _repo.GetAllCustomers())

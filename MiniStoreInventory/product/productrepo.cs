@@ -30,14 +30,13 @@ namespace ClassStore
             List<ProductModel> p = new List<ProductModel>();
             if (!File.Exists(file))
                 return p;
-
+            
             using (StreamReader sr = new StreamReader(file))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] parts = line.Split(',');
-                    if (parts.Length >= 5)
                     {
                         ProductModel item = new ProductModel(parts[0], parts[1], float.Parse(parts[2]), float.Parse(parts[3]), float.Parse(parts[4]));
                         p.Add(item);
