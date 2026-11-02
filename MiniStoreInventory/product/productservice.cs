@@ -7,7 +7,6 @@ namespace ClassStore
     internal class ProductService
     {
         private ProductRepo _repo = new ProductRepo();
-
         public void SaveProduct(ProductModel product)
         {
             _repo.SaveInFile(product);
@@ -65,7 +64,73 @@ namespace ClassStore
             }
             return false;
         }
+
+        // p.SetName("Laptop");             // SETTER
+        // Console.WriteLine(p.GetName()); // GETTER
+
+        public List<ProductModel> SearchByPartialName(string name)
+        {
+            List<ProductModel> products = _repo.GetAllProducts();
+            List<ProductModel> result = new List<ProductModel>();
+            foreach (ProductModel p in products)
+            {
+                if (p.GetName().ToLower().Contains(name.ToLower()))
+                {
+                    result.Add(p);
+                }
+            }
+            return result;
+        }
+
+        public List<ProductModel> SortAscending()
+        {
+            List<ProductModel> products = _repo.GetAllProducts();
+            for (int i = 0; i < products.Count-1; i++)
+            {
+                for (int j = i+1; j < products.Count; j++)
+                {
+                    string a = products[i].GetName();
+                    string b = products[j].GetName();
+                    if ( a[0] > b[0])
+                    {
+                        ProductModel temp = products[i];
+                        products[i] = products[j];
+                        products[j] = temp;
+                    }
+
+                    // if (string.Compare(products[j].GetName(), products[j + 1].GetName(), true) > 0)
+                    // {
+                    //     ProductModel temp = products[j];
+                    //     products[j] = products[j + 1];
+                    //     products[j + 1] = temp;
+                    // }
+                }
+            }
+
+            return products;
+        }
+
+        public List<ProductModel> SortDescending()
+        {
+            List<ProductModel> products = _repo.GetAllProducts();
+
+            for (int i = 0; i < products.Count-1; i++)
+            {
+                for (int j = i+1; j < products.Count; j++)
+                {
+                    string a = products[i].GetName();
+                    string b = products[j].GetName();
+                    if ( a[0] < b[0])
+                    {
+                        ProductModel temp = products[i];
+                        products[i] = products[j];
+                        products[j] = temp;
+                    }
+                }
+            }
+
+            return products;
+        }
     }
 }
-// p.SetName("Laptop");             // SETTER
-// Console.WriteLine(p.GetName()); // GETTER
+

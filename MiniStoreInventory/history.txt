@@ -33,3 +33,4 @@ Supplier added: u
 Supplier added: y
 Supplier deleted: y
 Supplier updated: uol
+Product added: a

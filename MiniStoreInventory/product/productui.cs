@@ -18,7 +18,10 @@ namespace ClassStore
                 Console.WriteLine("  3. Delete Product");
                 Console.WriteLine("  4. View All");
                 Console.WriteLine("  5. Search");
-                Console.WriteLine("  6. Back to Main Menu");
+                Console.WriteLine("  6. Search by Partial Name");
+                Console.WriteLine("  7. Sort Ascending ");//a-z
+                Console.WriteLine("  8. Sort Descending ");//z-a
+                Console.WriteLine("  9. Back to Main Menu");
                 Console.ResetColor();
                 Console.Write("\nSelect option: ");
                 string choice = Console.ReadLine();
@@ -28,10 +31,17 @@ namespace ClassStore
                 else if (choice == "3") Delete();
                 else if (choice == "4") DisplayAll();
                 else if (choice == "5") Search();
-                else if (choice == "6") break;
-                else { ConsoleUI.Error("Invalid choice."); ConsoleUI.Pause(); }
+                else if (choice == "6") SearchByPartialName();
+                else if (choice == "7") DisplayAscending();
+                else if (choice == "8") DisplayDescending();
+                else if (choice == "9") break;
+                else
+                {
+                    ConsoleUI.Error("Invalid choice.");
+                    ConsoleUI.Pause();
+                }
             }
-        }
+            }
 
         private ProductModel TakeInput()
         {
@@ -136,5 +146,69 @@ namespace ClassStore
             else Console.WriteLine(item.Display());
             ConsoleUI.Pause();
         }
+        private void DisplayAscending()
+        {
+            ConsoleUI.Header("Products - Ascending Order");
+            List<ProductModel> items = service.SortAscending();
+            DisplayProductTable(items);
+            ConsoleUI.Pause();
+        }
+
+        private void DisplayDescending()
+        {
+            ConsoleUI.Header("Products - Descending Order");
+            List<ProductModel> items = service.SortDescending();
+            DisplayProductTable(items);
+            ConsoleUI.Pause();
+        }
+
+        private void SearchByPartialName()
+        {
+            ConsoleUI.Header("Search by Partial Name");
+            Console.Write("Enter partial product name: ");
+            string name = Console.ReadLine();
+            List<ProductModel> items = service.SearchByPartialName(name);
+            if (items.Count == 0)
+            {
+                ConsoleUI.Error("No matching products found.");
+            }
+            else
+            {
+                DisplayProductTable(items);
+            }
+            ConsoleUI.Pause();
+        }
+
+
+        private void DisplayProductTable(List<ProductModel> items)
+        {
+        if (items.Count == 0)
+        {
+            Console.WriteLine("No records found.");
+            return;
+        }
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine(
+        "  {0,-15} | {1,-20} | {2,9} | {3,9} | {4,9}",
+        "NAME", "DESCRIPTION", "PURCHASE", "SALE", "DISCOUNT");
+        Console.WriteLine("  " + new string('-', 91));
+        foreach (ProductModel item in items)
+        {
+        Console.WriteLine(
+            "  {0,-15} | {1,-20} | {2,9} | {3,9} | {4,9}",
+            item.GetName(),
+            item.GetDescription(),
+            item.GetPurchasePrice(),
+            item.GetSalePrice(),
+            item.GetDiscount());
+        }
+        Console.ResetColor();
+        }
+
+
     }
 }
+
+
+
+
