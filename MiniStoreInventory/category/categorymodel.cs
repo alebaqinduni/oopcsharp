@@ -39,4 +39,4 @@ namespace ClassStore
             description = value; 
         }
     }
-}
+}//

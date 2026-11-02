@@ -50,4 +50,4 @@ namespace ClassStore
             company = value; 
         }
     }
-}
+}//
